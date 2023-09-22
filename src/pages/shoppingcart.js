@@ -5,7 +5,7 @@ import Homepage from '../pages/Homepage';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 const Cart = () => {
-    const { isCartOpen, cartItems, toggleCart, removeItem, incrementItem, decrementItem } = useContext(cartContext);
+    const { isCartOpen, cartItems, toggleCart, removeItem, incrementItem, decrementItem, clearCart } = useContext(cartContext);
     const navigate = useNavigate();
     // disable the body-scroll when the Cart is open
     /*useEffect(() => {
@@ -53,6 +53,7 @@ const Cart = () => {
                     const response = await axios.post("https://grocery-store-backend-f67o.onrender.com/api/pay/paymentverification",
                         { ...res });
                     if (response.data.success) {
+                        clearCart();
                         navigate("/paymentsuccess");
                     }
                     else {
